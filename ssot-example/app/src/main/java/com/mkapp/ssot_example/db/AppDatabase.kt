@@ -6,7 +6,7 @@ import com.mkapp.ssot_example.MyApplication
 import com.mkapp.ssot_example.db.dao.PostDao
 
 abstract class AppDatabase : RoomDatabase() {
-    abstract var dao: PostDao
+    abstract var postsDao: PostDao
 
     companion object {
         val instance by lazy {
