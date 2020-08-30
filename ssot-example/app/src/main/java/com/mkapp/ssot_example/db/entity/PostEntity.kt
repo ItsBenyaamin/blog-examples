@@ -18,6 +18,6 @@ data class PostEntity(
     var page: Int
 ) {
     @ColumnInfo(name = "id")
-    @PrimaryKey
-    var id: Int? = null
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 }
