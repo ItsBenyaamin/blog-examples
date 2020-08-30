@@ -18,7 +18,7 @@ class MainViewModel : ViewModel() {
         if (currentPage == maxPage) {
             return
         }
-        currentPage.inc()
+        currentPage += 1
         repository.getPosts(currentPage)
     }
 }
