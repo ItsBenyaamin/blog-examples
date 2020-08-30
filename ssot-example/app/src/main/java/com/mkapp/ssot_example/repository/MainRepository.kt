@@ -58,12 +58,10 @@ object MainRepository {
     }
 
     private fun updateCacheList() {
-        val list = postsList.value as ArrayList
-        val newList = database.postsDao().getPosts()
-        list.addAll(
-            DataMapper.entityToDataModel(newList)
+        val list = database.postsDao().getPosts()
+        postsList.postValue(
+            DataMapper.entityToDataModel(list)
         )
-        postsList.postValue(list)
         mainViewState.postValue(MainViewState.Successful(postsList.value!!))
     }
 }
