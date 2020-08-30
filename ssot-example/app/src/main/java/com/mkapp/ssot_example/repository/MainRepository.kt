@@ -24,7 +24,7 @@ object MainRepository {
     fun getPosts(page: Int) {
         ExecutorsUtil.runIO {
             mainViewState.postValue(MainViewState.Loading("loading"))
-            val pagePosts = database.postsDao().getPosts(page)
+            val pagePosts = database.postsDao().getPostsWithPage(page)
             if (pagePosts.isNotEmpty()) {
                 val newList = postsList.value as ArrayList
                 newList.addAll(
@@ -44,7 +44,7 @@ object MainRepository {
             val response = request.execute()
             if (response.isSuccessful) {
                 insertIntoDatabase(response.body()!!, page)
-                updateCacheList(page)
+                updateCacheList()
             }else {
                 mainViewState.postValue(MainViewState.Error(response.errorBody()?.string()!!))
             }
@@ -57,9 +57,9 @@ object MainRepository {
         )
     }
 
-    private fun updateCacheList(page: Int) {
+    private fun updateCacheList() {
         val list = postsList.value as ArrayList
-        val newList = database.postsDao().getPosts(page)
+        val newList = database.postsDao().getPosts()
         list.addAll(
             DataMapper.entityToDataModel(newList)
         )
