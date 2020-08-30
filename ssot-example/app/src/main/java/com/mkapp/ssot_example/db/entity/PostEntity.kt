@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-data class Post(
+@Entity(tableName = "post")
+data class PostEntity(
     @ColumnInfo(name = "user_id")
     var userId: Int,
     @ColumnInfo(name = "post_id")
